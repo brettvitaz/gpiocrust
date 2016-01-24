@@ -2,7 +2,7 @@
 A mock API for when RPi.GPIO is not available. Useful for building out
 applications while not on the Pi itself.
 """
-import gpiocrust.edges as edges
+from gpiocrust.edges import Edges
 from gpiocrust.pin_mode import PinMode
 
 class Header(object):
@@ -78,9 +78,9 @@ class InputPin(object):
             fn(self.value)
             # TODO: finish
 
-    def trigger(self, value, edge=edges.BOTH):
+    def trigger(self, value, edge=Edges.BOTH):
         # TODO: bouncetime
-        if edge == self._edge or edge == edges.BOTH:
+        if edge == self._edge or edge == Edges.BOTH:
             self._callback(value)
 
     def wait_for_edge(self):

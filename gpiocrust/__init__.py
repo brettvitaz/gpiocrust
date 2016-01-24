@@ -21,3 +21,4 @@ except ImportError:
     from .gpio_mock import *
 
 from .pin_mode import *
+from .edges import *

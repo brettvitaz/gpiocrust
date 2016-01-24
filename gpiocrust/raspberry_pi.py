@@ -1,13 +1,13 @@
 """An object-oriented wrapper around RPi.GPIO"""
 
 import RPi.GPIO as GPIO
-import gpiocrust.edges as edges
+from gpiocrust.edges import Edges
 from gpiocrust.pin_mode import PinMode
 
 _edge_to_rpi_edge = {
-    edges.RISING: GPIO.RISING,
-    edges.FALLING: GPIO.FALLING,
-    edges.BOTH: GPIO.BOTH,
+    Edges.RISING: GPIO.RISING,
+    Edges.FALLING: GPIO.FALLING,
+    Edges.BOTH: GPIO.BOTH,
 }
 
 _pinmode_to_rpi_mode = {
@@ -92,7 +92,7 @@ class PWMOutputPin(OutputPin):
 class InputPin(object):
     """A single GPIO pin set for input"""
 
-    def __init__(self, pin, value=0, callback=None, edge=edges.BOTH, bouncetime=None, header=None):
+    def __init__(self, pin, value=0, callback=None, edge=Edges.BOTH, bouncetime=None, header=None):
         """
 
         :param pin: GPIO pin to setup as an input.
@@ -137,7 +137,7 @@ class InputPin(object):
     def value(self):
         return GPIO.input(self._pin)
 
-    def change(self, fn, edge=edges.BOTH):
+    def change(self, fn, edge=Edges.BOTH):
         """Allow for `@change` decorator"""
 
         def wrapped(pin):
